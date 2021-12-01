@@ -47,3 +47,8 @@ IPv4 vs Ipv6
 IP address presented:
 
 0x8002c2f2 = 128.2.194.242 (dotted-decimal representation)
+
+### Domain
+
+ICANN in charge of first-level domain
+
