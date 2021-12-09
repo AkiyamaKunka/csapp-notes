@@ -4,7 +4,7 @@ Author: Junjia Wang
 
 Date: Since 28 Nov 2021
 
-## 1. Computer Network
+## Computer Network
 
 ### Basic of Network
 
@@ -86,7 +86,7 @@ This pair of socket addresses is known as a *socket pair* and is denoted by the 
 * A set of functions in conjuction with Unix I/O functions
 * Implemented by UCB
 
-```C
+```c
   /* IP socket address structure */
   struct sockaddr_in  {
     uint16_t        sin_family;  /* Protocol family (always AF_INET) */
@@ -101,3 +101,57 @@ struct sockaddr {
     };
 
 ```
+
+### Create Socket Descriptor
+
+```c
+#include <sys/types.h>
+#include <sys/socket.h>
+int socket(int domain, int type, int protocol);
+
+clientfd = Socket(AF_INET, SOCK_STREAM, 0);
+
+```
+
+This end point socket in client side is not opened yet.
+
+### Call Connect Function
+
+```c
+#include <sys/socket.h>
+int connect(int clientfd, const struct sockaddr *addr,
+            socklen_t addrlen);
+```
+
+Establish an Internet connection with server
+
+ resulting connection is characterized by the socket pair
+
+```c
+ (x:y, addr.sin_addr:addr.sin_port)
+// x is client IP, y is ephemeral port
+```
+
+### Call bind/listen/accept Function
+
+These socket functions are used by **servers** to establish connections with clients.
+
+```c
+#include <sys/socket.h>
+int bind(int sockfd, const struct sockaddr *addr,
+         socklen_t addrlen);
+// The bind function asks the kernel to associate the server’s socket address in addr with the socket descriptor sockfd.
+int listen(int sockfd, int backlog);
+// 
+int accept(int listenfd, struct sockaddr *addr, int *addrlen);
+```
+
+#### *socket* *address*:
+
+* TCP/IP creates the *socket* *address* as an identifier that is unique throughout all Internet networks
+* TCP/IP concatenates the Internet address of the local host interface with the port number to devise the Internet socket address.
+
+#### *file descriptor:* 
+
+* a unique identifier for a file or other input/output resource, such as a pipe or network socket. 
+* Typically have non-negative integer values, with negative values being reserved to indicate "no value" or error conditions
