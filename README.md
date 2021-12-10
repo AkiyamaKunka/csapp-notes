@@ -8,9 +8,9 @@ Date: Since 28 Nov 2021
 
 ### Basic of Network
 
-Type1: Host(Adapter) -> Hub(1Mbps) -> Bridge(1Gbps) = LAN
+* Type1: Host(Adapter) -> Hub(1Mbps) -> Bridge(1Gbps) = LAN
 
-Type2 : Host + Host = LAN -> Router + Router = WAN
+* Type2 : Host + Host = LAN -> Router + Router = WAN
 
 Internet Protocol will define:
 
@@ -33,28 +33,32 @@ IP Protocol: unreliable, from host to host
 
 UDP(Unreliable Datagram Protocol): extended IP, from process to process
 
-Internet Properties:
+#### Internet Properties:
 
 * The set of hosts is mapped to a set of 32-bit *IP addresses.*
 * The set of IP addresses is mapped to a set of identifiers called *Internet domain names.*
 * A process on one Internet host can communicate with a process on any other Internet host over a *connection*.
 
-IPv4 vs Ipv6
+#### IPv4 vs Ipv6
 
 * The original Internet protocol, with its 32-bit addresses, is known as Internet Protocol Version 4 (IPv4).
 * Internet Protocol Version 6 (IPv6), that uses 128-bit addresses and that was intended as the successor to IPv4.
 
-IP address presented:
+#### IP address presented:
 
+```
 0x8002c2f2 = 128.2.194.242 (dotted-decimal representation)
+```
 
 ICANN (Internet Corporation for Assigned Names and Numbers) maintain the first-level domain names
 
 Their DNS Database define millions of host-entries, mappping from domain names to IP addresses.
 
+```
 localhost -> *loopback address* 127.0.0.1:
 
 multiple domain name -> same IP address
+```
 
 In the most general case, multiple domain names are mapped to the same set of multiple IP addresses:
 
