@@ -4,6 +4,96 @@ Author: Junjia Wang
 
 Date: Since 28 Nov 2021
 
+## Floating Point
+
+Floating Point IEEE Expression: $$V = (-1)^S M 2 ^E$$
+
+S: Sign, determine whether it's positive or negative
+
+M: Significand, also called Mantissa, $M \neq frac$
+
+E:  Exponent, weights value by power of 2, $E \neq exp$
+
+$$Bias = 2^{(k-1)} - 1$$, K is number of exponent bits
+
+* Single precision:127
+* Double precision: 1023
+
+### Denormalized Numbers
+
+$ M = 0.xxxx$
+
+$$ E = 1 - Bias$$
+
+Denormalized Numbers are designed to represent the values who are very close to 0
+
+### Normalized Numbers
+
+$ M = 1.xxxx$
+
+ $$E = Exp - Bias$$
+
+### Sepcial Values
+
+Condition: 
+
+$Exp = 1111..11$
+
+#### Infinity
+
+$Frac = 000..00$
+
+#### Not-a-Number(NaN)
+
+$Frac \neq 000..00$
+
+### Decimal Rounding
+
+* Toward Zero
+* Round Down($-\infty$)
+* Round Up($+\infty$) 
+* Nearest Even (default by IEEE, **Statistically Wise**)
+
+*E.g. 1.4 -> 1, 1.6 -> 2, 1.5 ->2(nearest even for 1.5 is 2), 2.5 -> 2*
+
+### Binary Rounding
+
+* "Even" whe last significant bit = 0
+* "Half Way" when bits to right is 100..s
+
+E.g. 10.00|101 -> 10.01 10.00|011 -> 10.00
+
+### Mutiplication
+
+* S:  s1 ^ s2
+* M: M1 * M2
+* E: E1 + E2
+
+### Addition
+
+Basic Idea: get binary points lined up
+
+### Casting
+
+C guarantees Two Levels
+
+```````````c
+double // double precision, 53 bits in frac
+float  // single precision, 23 bits in frac
+```````````
+
+#### double/float -> int:
+
+Truncates and rounding
+
+#### int -> double
+
+Exact conversion, since int has 32-bits <= 53 of double's precision bits
+
+#### int -> float
+
+**Will round!** 32 bits > 23 of float single precision
+
 ## Computer Network
 
 ### Basic of Network
