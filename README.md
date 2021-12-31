@@ -1,6 +1,6 @@
 # Notes on _Computer System: A Programmer's Perspetive_
 
-Author: Junjia Wang
+Author: Kunka Akiyama
 
 Date: Since 28 Nov 2021
 
