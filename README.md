@@ -4,6 +4,10 @@ Author: Junjia Wang
 
 Date: Since 28 Nov 2021
 
+```math
+a^2+b^2=c^2
+```
+
 ## Floating Point
 
 Floating Point IEEE Expression: $$V = (-1)^S M 2 ^E$$
