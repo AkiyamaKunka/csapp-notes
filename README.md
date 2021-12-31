@@ -10,7 +10,7 @@ a^2+b^2=c^2
 
 ## Floating Point
 
-Floating Point IEEE Expression: $$V = (-1)^S M 2 ^E$$
+Floating Point IEEE Expression: ```math $$V = (-1)^S M 2 ^E ```
 
 S: Sign, determine whether it's positive or negative
 
