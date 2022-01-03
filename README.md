@@ -2,9 +2,9 @@
 
 Author: Kunka Akiyama
 
-Date: Since 28 Nov 2021
+Created: 28 Nov 2021
 
-Last Update: 2 Jan 2022
+Last Updated: 2 Jan 2022
 
 ## Machine Level Programming
 
