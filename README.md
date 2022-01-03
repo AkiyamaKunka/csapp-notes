@@ -23,6 +23,11 @@ linux> gcc -0g -o p p1.c p2.c
 * -c: compile and assemble
 * -Og, -O1, O2: Compile and optimized code with level g, 1, 2...
 
+### Instruction Convention on Registers
+
+* 1-2 Bytes Operation, leave other bits unchanged
+* 4 Bytes Operation, set upper bits to zero
+
 ## Floating Point
 
 Floating Point IEEE Expression: $$V = (-1)^S M 2 ^E$$
