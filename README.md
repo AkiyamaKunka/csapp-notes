@@ -4,6 +4,25 @@ Author: Kunka Akiyama
 
 Date: Since 28 Nov 2021
 
+## Machine Level Programming
+
+```````shell
+linux> gcc -0g -o p p1.c p2.c
+```````
+
+### Programm Encoding
+
+1. C *Preprocesssor* expand Macro, add code from file that concluded by source file with #include
+2. *Compiler* generate assembly file "p1.s", "p2.s"
+3. *Assembler* convert them to object file "p1.o", "p2.o", which is binary
+4. *Linker* merge the two file, along with code of function (e.g. printf) to the executable file "p" as sepcifed with "-o p"
+
+### GCC command option
+
+* -S: compile, then stop
+* -c: compile and assemble
+* -Og, -O1, O2: Compile and optimized code with level g, 1, 2...
+
 ## Floating Point
 
 Floating Point IEEE Expression: $$V = (-1)^S M 2 ^E$$
