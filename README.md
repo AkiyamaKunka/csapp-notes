@@ -4,6 +4,8 @@ Author: Kunka Akiyama
 
 Date: Since 28 Nov 2021
 
+Update: 5 Jan 2022
+
 ## Machine Level Programming
 
 ```````shell
@@ -12,10 +14,10 @@ linux> gcc -0g -o p p1.c p2.c
 
 ### Programm Encoding
 
-1. C *Preprocesssor* expand Macro, add code from file that concluded by source file with #include
-2. *Compiler* generate assembly file "p1.s", "p2.s"
-3. *Assembler* convert them to object file "p1.o", "p2.o", which is binary
-4. *Linker* merge the two file, along with code of function (e.g. printf) to the executable file "p" as sepcifed with "-o p"
+1. C *Preprocesssor* expand Macro, add code from file that concluded by source file with `#include`
+2. *Compiler* generate assembly file `p1.s`, `p2.s`
+3. *Assembler* convert them to object file `p1.o` ` p2.o`, which is binary
+4. *Linker* merge the two file, along with code of function (e.g. printf) to the executable file "p" as sepcifed with `-o p`
 
 ### GCC command option
 
@@ -34,20 +36,20 @@ In the assembly syntax accepted by `gcc`, register names are always prefixed wit
 
 The register file is as follows:
 
-| Register | Purpose                                | Saved across calls |
-| -------- | -------------------------------------- | ------------------ |
-| `%rax`   | temp register; return value            | No                 |
-| %rbx     | callee-saved                           | Yes                |
-| %rcx     | used to pass 4th argument to functions | No                 |
-| %rdx     | used to pass 3rd argument to functions | No                 |
-| `%rsp`   | stack pointer                          | Yes                |
-| `%rbp`   | callee-saved; base pointer             | Yes                |
-| %rsi     | used to pass 2nd argument to functions | No                 |
-| %rdi     | used to pass 1st argument to functions | No                 |
-| %r8      | used to pass 5th argument to functions | No                 |
-| %r9      | used to pass 6th argument to functions | No                 |
-| %r10-r11 | temporary                              | No                 |
-| %r12-r15 | callee-saved registers                 | Yes                |
+| Register   | Purpose                                | Saved across calls |
+| ---------- | :------------------------------------- | ------------------ |
+| `%rax`     | temp register; return value            | No                 |
+| `%rbx`     | callee-saved                           | Yes                |
+| `%rcx`     | used to pass 4th argument to functions | No                 |
+| `%rdx`     | used to pass 3rd argument to functions | No                 |
+| `%rsp`     | stack pointer                          | Yes                |
+| `%rbp`     | callee-saved; base pointer             | Yes                |
+| `%rsi`     | used to pass 2nd argument to functions | No                 |
+| `%rdi`     | used to pass 1st argument to functions | No                 |
+| `%r8`      | used to pass 5th argument to functions | No                 |
+| `%r9`      | used to pass 6th argument to functions | No                 |
+| `%r10-r11` | temporary                              | No                 |
+| `%r12-r15` | callee-saved registers                 | Yes                |
 
 
 For the code generation phase of the project you will not be performing register allocation. You should use %r10 and %r11 for temporary values that you load from the stack.
