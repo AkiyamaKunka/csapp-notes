@@ -51,8 +51,19 @@ The register file is as follows:
 | `%r10-r11` | temporary                              | No                 |
 | `%r12-r15` | callee-saved registers                 | Yes                |
 
-
 For the code generation phase of the project you will not be performing register allocation. You should use %r10 and %r11 for temporary values that you load from the stack.
+
+### Caller-saved and Callee-saved
+
+> **Caller-saved registers** (AKA **volatile** registers, or **call-clobbered**) are used to hold temporary quantities that need not be preserved across calls.
+
+For that reason, it is the caller's responsibility to push these registers onto the stack or copy them somewhere else *if* it wants to restore this value after a procedure call.
+
+It's normal to let a `call` destroy temporary values in these registers, though.
+
+> **Callee-saved registers** (AKA **non-volatile** registers, or **call-preserved**) are used to hold long-lived values that should be preserved across calls.
+
+When the caller makes a procedure call, it can expect that those registers will hold the same value after the callee returns, making it the responsibility of the callee to save them and restore them before returning to the caller. Or to not touch them.
 
 ## Floating Point
 
