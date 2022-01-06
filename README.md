@@ -2,9 +2,7 @@
 
 Author: Kunka Akiyama
 
-Created: 28 Nov 2021
-
-Last Updated: 2 Jan 2022
+Date: Since 28 Nov 2021
 
 ## Machine Level Programming
 
@@ -29,6 +27,30 @@ linux> gcc -0g -o p p1.c p2.c
 
 * 1-2 Bytes Operation, leave other bits unchanged
 * 4 Bytes Operation, set upper bits to zero
+
+### Registers Convention
+
+In the assembly syntax accepted by `gcc`, register names are always prefixed with `%`. All of these registers are 64 bits wide.
+
+The register file is as follows:
+
+| Register | Purpose                                | Saved across calls |
+| -------- | -------------------------------------- | ------------------ |
+| `%rax`   | temp register; return value            | No                 |
+| %rbx     | callee-saved                           | Yes                |
+| %rcx     | used to pass 4th argument to functions | No                 |
+| %rdx     | used to pass 3rd argument to functions | No                 |
+| `%rsp`   | stack pointer                          | Yes                |
+| `%rbp`   | callee-saved; base pointer             | Yes                |
+| %rsi     | used to pass 2nd argument to functions | No                 |
+| %rdi     | used to pass 1st argument to functions | No                 |
+| %r8      | used to pass 5th argument to functions | No                 |
+| %r9      | used to pass 6th argument to functions | No                 |
+| %r10-r11 | temporary                              | No                 |
+| %r12-r15 | callee-saved registers                 | Yes                |
+
+
+For the code generation phase of the project you will not be performing register allocation. You should use %r10 and %r11 for temporary values that you load from the stack.
 
 ## Floating Point
 
