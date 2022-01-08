@@ -61,9 +61,27 @@ void phase_2(){
     b = p + 0x4;
     a = p + 0x18;
     int *res = b - 0x4;
+}
 
+void pahse_3(){
+    char * p;
     
-
+    char * arg4 = p + 0xc;
+    char * arg3 = p + 0x8;
+    char * arg2 = 0x4025cf; // format string is "%d %d"
+    char r = 0x0;
+    r = sscanf(arg1, "%d, %d");
+    if(r <= 1){
+        explode_bomb();
+    }
+    if(p + 0x8 > 0x7){
+        explode_bomb();
+    }
+    r = p + 0x8;
+    // jump to 0x402470 + 8 * &r
+    // after I learnt how to use gdb
+    // one acceptable answer is input 1, 311
+    
 }
 
 
