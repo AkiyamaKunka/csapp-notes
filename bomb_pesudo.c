@@ -63,7 +63,7 @@ void phase_2(){
     int *res = b - 0x4;
 }
 
-void pahse_3(){
+void phase_3(){
     char * p;
     
     char * arg4 = p + 0xc;
@@ -81,7 +81,58 @@ void pahse_3(){
     // jump to 0x402470 + 8 * &r
     // after I learnt how to use gdb
     // one acceptable answer is input 1, 311
-    
+
 }
 
+void phase_4(){
+    char * p;
+    char * arg1;
+    int r;
+    char * arg4 = p + 0xc;
+    char * arg3 = p + 0x8;
+    char * arg2 = 0x4025cf; // format string is "%d %d"
+    r = sscanf(arg1, "%d, %d");
+    if(r != 2){
+        explode_bomb();
+    }
+    if(*arg3 > 0xe){
+        
+    }
+    * arg3 = 0xe;
+    * arg2 = 0x0;
+    * arg1 = p + 0x8;
+    *r = func4();
+    if(*r != 0){
+        explode_bomb(); 
+    }
+    if(* arg4 != 0){
+        explode_bomb(); 
+    }
+    return;
+}
+
+void func4(){
+    char * arg1;
+    char * arg4;
+    char * arg3;
+    char * arg2;
+    char * r = *arg3 - *arg2;
+    *arg4 = *r;
+    *r += (*arg4 >> 31);
+    *r /= 2;
+    arg4 = (r + arg2);
+    if(*arg4 <= *arg1){
+        *r = 0x0;
+        if(*arg4 < *arg1){
+            arg2 = arg4 - 0x1;
+            *r = func4();
+            r = 2 * r + 1;
+        }
+    }else{
+        arg3 = arg4 - 1;
+        *r = func4();
+        *r *= 2;
+    }
+    return *r;
+}
 
