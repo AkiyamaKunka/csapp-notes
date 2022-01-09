@@ -101,7 +101,7 @@ void phase_4(){
     * arg3 = 0xe;
     * arg2 = 0x0;
     * arg1 = p + 0x8;
-    *r = func4();// first_input, 0, 0xe, second_input
+    *r = func4();// first_input, 0, 0xe
     if(*r != 0){
         explode_bomb(); 
     }
@@ -110,6 +110,7 @@ void phase_4(){
     }
     return;
 }
+
 
 void func4(){
     char * arg1;
@@ -121,16 +122,16 @@ void func4(){
     *arg4 >>= 31;
     *r += *arg4;
     *r /= 2;    // 7
-    arg4 = (r + arg2); //
-    if(*arg4 <= *arg1){
+    *arg4 = *r + *arg2; // 7
+    if(*arg4 <= *arg1){ // input >= 7
         *r = 0x0;
-        if(*arg4 < *arg1){
-            arg2 = arg4 - 0x1;
-            *r = func4();
+        if(*arg4 < *arg1){ 
+            *arg2 = *arg4 - 0x1; // 7 - 1
+            *r = func4(); // first_input, 6, 14
             r = 2 * r + 1;
         }
     }else{
-        arg3 = arg4 - 1;
+        arg3 = arg4 - 1;  // first_input, 0, 7
         *r = func4();
         *r *= 2;
     }
