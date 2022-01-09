@@ -138,3 +138,16 @@ void func4(){
     return *r;
 }
 
+void func5(){
+    char a;
+    char arg1;
+    a = arg1;
+    char * r = scanf();
+    if(r != 6){
+         explode_bomb();
+    }
+    char * arg4 = * arg1;
+    char * arg3 = *arg4 // cut 1 byte
+    
+}
+
