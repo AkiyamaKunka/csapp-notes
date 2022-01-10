@@ -157,7 +157,25 @@ void phase_5(){
 void phase_6(){
     read_six_numbers();
     // check if these numbers are duplicated
-    // 
+    // check all number must be in 1 to 6
+    
+    
 }
 
+// see the node structure, construct a linked list
+// make them decreasing
 
+0x6032d0 <node1>:       0x000000010000014c      0x00000000006032e0
+0x6032e0 <node2>:       0x00000002000000a8      0x00000000006032f0
+0x6032f0 <node3>:       0x000000030000039c      0x0000000000603300
+0x603300 <node4>:       0x00000004000002b3      0x0000000000603310
+0x603310 <node5>:       0x00000005000001dd      0x0000000000603320
+0x603320 <node6>:       0x00000006000001bb      0x0000000000000000
+
+// final answer
+Border relations with Canada have never been better.
+1 2 4 8 16 32
+1 311
+7 0
+ionefg
+4 3 2 1 6 5
