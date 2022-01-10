@@ -138,7 +138,7 @@ void func4(){
     return *r;
 }
 
-void func5(){
+void phase_5(){
     char * a;
     char * arg1;
     a = arg1;
@@ -151,6 +151,13 @@ void func5(){
     char * arg3 = * arg4; // left only 1 byte
     // accept an array in a length of 6
     // make the last 1 byte as offest, to get an another array of flyers
-    
+    // 
 }
+
+void phase_6(){
+    read_six_numbers();
+    // check if these numbers are duplicated
+    // 
+}
+
 
