@@ -8,11 +8,24 @@ Update: 12 Jan 2022
 
 ## Machine Level Programming
 
+### Buffer Overflow Attack
+
+#### Attack Methods:
+
+1. Example in`gets()`, input more chars than it can hold, then overwrite the `return address`
+2. Using `nop sled` to make the `program counter` jump to many "nop" instruction, and finally excutate attacker's code `nop` is short for "no operation". 
+
+#### Protective Methods:
+
+1. Randomlization to the programm starting address (and other part)
+2. Mark portions of code in memory from input only "readable" but not "excutable" 
+3. Set a `canary` as checker beyond called function
+
 ### Memory Model on x86-64 Machine : Byte-Orientated
 
-1 address location store 1 byte of data
+* 1 address location store 1 byte of data
 
-8 bytes in the same line
+* 8 bytes in the same line
 
 ### Segmentation fault
 
@@ -24,6 +37,49 @@ A common way to get a segfault is to dereference a null pointer:
 int *p = NULL;
 *p = 1;
 ```
+
+### Little-Endianness
+
+* x86-64 architechture uses little-endianness, while TCP/IP network use big-endianness
+
+* little-endianness refers to the byte ordering where the least significant byte is stored first.
+
+For example, 0x12345678 store in memory with little-endianness is:
+
+```assembly
+78 56 34 12
+```
+
+Another example, to store an array
+
+```c
+int a[] = {0x12345678, 0x9abcdef0};
+```
+
+```assembly
+0x00: 78 56 34 12
+0x04: f0 de bc 9a
+```
+
+Why Little-endianess is good for computer:
+
+```c
+// In the case of 64 bit compilers, long long is the same size as long. They are both 8 bytes.
+unsigned long long x = 0x0000000000000042;
+unsigned long long * x_p = &x;
+unsigned int * y_p = (unsigned int *)x_p;
+unsigned int y = *y_p;
+printf("y = %#.8x\n", y); // prints in hex with '0x' and with all leading zeros
+```
+
+Assume `y` and `x` all points to `0x00` in adress
+
+```
+0x00: 42 00 00 00
+0x04: 00 00 00 00
+```
+
+We get exactly what you would expect to get: `y = 0x00000042`, even we do a "pointer down cast"
 
 ### Programm Encoding
 
