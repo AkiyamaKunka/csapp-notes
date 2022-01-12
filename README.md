@@ -8,17 +8,28 @@ Update: 12 Jan 2022
 
 ## Machine Level Programming
 
-### Memory Model on x86-64 Machine
+### Memory Model on x86-64 Machine : Byte-Orientated
 
 1 address location store 1 byte of data
 
 8 bytes in the same line
 
+### Segmentation fault
+
+Segmentation fault is a specific kind of error caused by accessing memory that “does not belong to you.”
+
+A common way to get a segfault is to dereference a null pointer:
+
+```cpp
+int *p = NULL;
+*p = 1;
+```
+
+### Programm Encoding
+
 ```````shell
 linux> gcc -0g -o p p1.c p2.c
 ```````
-
-### Programm Encoding
 
 1. C *Preprocesssor* expand Macro, add code from file that concluded by source file with `#include`
 2. *Compiler* generate assembly file `p1.s`, `p2.s`
