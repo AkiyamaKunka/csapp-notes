@@ -4,9 +4,15 @@ Author: Kunka Akiyama
 
 Date: Since 28 Nov 2021
 
-Update: 6 Jan 2022
+Update: 12 Jan 2022
 
 ## Machine Level Programming
+
+### Memory Model on x86-64 Machine
+
+1 address location store 1 byte of data
+
+8 bytes in the same line
 
 ```````shell
 linux> gcc -0g -o p p1.c p2.c
