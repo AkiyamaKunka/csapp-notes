@@ -5,3 +5,5 @@ cat exploit.txt | ./hex2raw | ./ctarget -q
 run exploit.txt > ./hex2raw -q
 // disassemble the binary file to asm
 objdump -d ctarget > ctarget.d
+// convert txt hex to the format that the program can read
+bash> ./hex2raw < exploit.txt >| exploit_raw.txt
