@@ -34,6 +34,15 @@ unix> gcc -c example.s
 unix> objdump -d example.o > example.d
 
 
+// phase_2
+
+AA AA AA AA AA AA AA AA
+AA AA AA AA AA AA AA AA
+AA AA AA AA AA AA AA c3 # ret
+00 40 17 ec c4 c7 48 00 # set rsp
+59 b9 97 fa c7 c7 48 00 # mov instruction
+98 dc 61 55 00 00 00 00 # ret address
+
 // will get file
 example.o: file format elf64-x86-64
 Disassembly of section .text:
