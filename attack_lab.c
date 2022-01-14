@@ -3,8 +3,6 @@
 cat exploit.txt | ./hex2raw | ./ctarget -q
 
 // command to debug in gdb
-run exploit.txt > ./hex2raw -q
-// or
 run < exploit_raw.txt -q
 
 
