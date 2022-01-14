@@ -10,7 +10,7 @@ run < exploit_raw.txt -q
 objdump -d ctarget > ctarget.d
 
 // convert txt hex to the format that the program can read
-bash> ./hex2raw < exploit.txt >| exploit_raw.txt
+./hex2raw < exploit.txt >| exploit_raw.txt
 
 
 // phase_1
