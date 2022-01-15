@@ -4,9 +4,39 @@ Author: Kunka Akiyama
 
 Date: Since 28 Nov 2021
 
-Update: 12 Jan 2022
+Update: 15 Jan 2022
 
 ## Machine Level Programming
+
+### Variable - Size Stack Frames
+
+`%rbp` original value will first stored by the callee by:
+
+```assembly
+pushq %rbp
+```
+
+Then `%rbp` will store the value `%rsp`, because the size of stack is uncertain
+
+```assembly
+movq %rsp, %rbp
+```
+
+After the function the done, the last two things are:
+
+Set `%rsp` point to where store the `%rbp`value
+
+```assembly
+movq %rbp, %rsp
+```
+
+Then pop the value back to `%rbp`, but notice that the `%rsp` will also increase 8 by `popq`operation
+
+```assembly
+popq %rbp
+```
+
+Finally `%rsp`point at the `return address`, `ret`will make the `rip`point to this address and return to the `caller`address
 
 ### Buffer Overflow Attack
 
@@ -15,10 +45,10 @@ Update: 12 Jan 2022
 1. Example in`gets()`, input more chars than it can hold, then overwrite the `return address`
 2. Using `nop sled` to make the `program counter` jump to many "nop" instruction, and finally excutate attacker's code `nop` is short for "no operation". 
 
-#### Protective Methods:
+#### Agaisnt Buffer Overflow Attack Methods:
 
 1. Randomlization to the programm starting address (and other part)
-2. Mark portions of code in memory from input only "readable" but not "excutable" 
+2. Mark portions of code in memory from input only "readable" but not "excutable"
 3. Set a `canary` as checker beyond called function
 
 ### Memory Model on x86-64 Machine : Byte-Orientated
@@ -97,6 +127,16 @@ linux> gcc -0g -o p p1.c p2.c
 * -S: compile, then stop
 * -c: compile and assemble
 * -Og, -O1, O2: Compile and optimized code with level g, 1, 2...
+
+### objdump Usage
+
+Command:
+
+```shell
+objdump -d ctarget > asm_ctarget.txt
+```
+
+to disassmble binary file and store the result to txt file
 
 ### Instruction Convention on Registers
 
