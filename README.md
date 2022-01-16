@@ -6,6 +6,16 @@ Date: Since 28 Nov 2021
 
 Update: 15 Jan 2022
 
+
+
+## Program Optimization
+
+### Methods
+
+* Avoid stupid operation
+* Unrolling Loop + Prallel Calculation
+* Predict Branching
+
 ## Machine Level Programming
 
 ### Variable - Size Stack Frames
