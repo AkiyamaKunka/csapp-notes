@@ -1,10 +1,16 @@
+
+有点累，想休息下，但是还是继续学吧。
+没有老师，没有同学，没有考试，没有作业，没有ddl，没有学分，没有成绩
+只有一个信念——我在变强
+
+
 # Notes on _Computer System: A Programmer's Perspetive_
 
 Author: Kunka Akiyama
 
 Date: Since 28 Nov 2021
 
-Update: 15 Jan 2022
+Update: 16 Jan 2022
 
 
 
