@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#define MAX_SIZE 100
 
 typedef struct
 {
@@ -30,8 +31,9 @@ int main(int argc, char *argv[]) {
                          "-b <b>: Number of block bits (B = 2^b is the block size)\n"
                          "-t <tracefile>: Name of the valgrind trace to replay\n";
 
-    int v_flag, s_val, E_val, b_val;
+    int v_flag, s_val, E_val, b_val, opt;
     char * t_val; // name of trace file
+    
     v_flag = 0;
     while ((opt = getopt(argc, argv, "hvs:E:b:t:")) != -1) {
         switch (opt){
@@ -58,9 +60,49 @@ int main(int argc, char *argv[]) {
             exit(EXIT_FAILURE);
         }
     }
+    
+    FILE * file;
+    file = fopen(strcat("traces/", t_val), "r");
+    if(file == NULL){
+        perror("Error opening file");
+        return(-1);
+    }
 
-    printf("flags=%d; tfnd=%d; nsecs=%d; optind=%d\n",
-           flags, tfnd, nsecs, optind);
+    char * input[MAX_SIZE];
+    while(fgets(input, MAX_SIZE, file) != NULL){
+        char cache_opt;
+        unsigned int addr;
+        int opt_size;
+        for(int i = 0; input[i] != NULL && input[i] != '\n' ; ++i){
+            char ch = input[i];
+            int read_size_flag;
+            read_size_flag = 0;
+            if(ch == 'I'){
+
+            }else if(ch == 'L'){
+
+            }else if(ch == 'S'){
+
+            }else if(ch == 'M'){
+
+            }else if(ch == ','){
+
+            }else if(ch == ' '){
+                read_size_flag = 1;
+            }else{
+                if(read_size_flag == 1){
+                    opt_size = (int)ch;
+                }else{
+                    
+                }
+            }
+        }
+        
+
+    }
+
+
+
 
     if (optind >= argc)
     {
