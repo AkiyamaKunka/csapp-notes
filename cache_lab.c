@@ -29,28 +29,31 @@ int main(int argc, char *argv[]) {
                          "-E <E>: Associativity (number of lines per set)\n"
                          "-b <b>: Number of block bits (B = 2^b is the block size)\n"
                          "-t <tracefile>: Name of the valgrind trace to replay\n";
-                         
-    int h_flag, v_flag, s_val, E_val, b_val, t_val;
-    h_flag = 0;
+
+    int v_flag, s_val, E_val, b_val;
+    char * t_val; // name of trace file
     v_flag = 0;
     while ((opt = getopt(argc, argv, "hvs:E:b:t:")) != -1) {
         switch (opt){
         case 'h':
-            h_flag = 1;
+            printf("%s", help_string);
             break;
-
-        case ''
-
-
-        case 'n':
-            flags = 1;
+        case 'v':
+            v_flag = 1;
+            break;
+        case 's':
+            s_val = atoi(optarg);
+            break;
+        case 'E':
+            E_val = atoi(optarg);
+            break;
+        case 'b':
+            b_val = atoi(optarg);
             break;
         case 't':
-            nsecs = atoi(optarg);
-            tfnd = 1;
-            break;
+            t_val = optarg;
         default: /* '?' */
-            fprintf(stderr, "Usage: %s [-t nsecs] [-n] name\n",
+            fprintf(stderr, help_string,
                     argv[0]);
             exit(EXIT_FAILURE);
         }
