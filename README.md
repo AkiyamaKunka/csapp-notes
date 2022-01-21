@@ -4,9 +4,79 @@ Author: Kunka Akiyama
 
 Date: Since 28 Nov 2021
 
-Update: 16 Jan 2022
+Update: 20 Jan 2022
 
+## Memory Hierachy
 
+### Cache Hit
+
+Program need object data `d` from level `k + 1`, the cache at level `k` happen to hold this data
+
+### Cache Miss
+
+Program need object data `d` from level `k + 1`, the cache at level `k`  does not hold this data
+
+* Process of overwriting an existing block is called __replacing__ or __evicting__
+* The behavior of __evicting__ would be governed by __cache replacement policy__
+
+Empty cache is also called __cold cache__, the miss is called __compulsory miss__ or __cold miss__
+
+### Restrictive Placement Policy
+
+For example, element in level k + 1 use  `index mod 4`  to place to level k
+
+But __conflict miss__ would happen, if you constantly access to index 0 and index 8
+
+If cache capacity < __working set__,(e.g. a loop use 2 virarble but cache can only contain 1) then performance will be damaged, called __capacity misses__
+
+### Cache Management
+
+Software and Hardware both can manage cache
+
+* Registers: by compiler
+* L1, L2, L3 Caches, managed by hardware logic on CPU
+* DRAM main memory: serves as "cache" for disks, by OS + address hardware on CPU
+* AFS, serves as local disk cache, by AFS client process on local machine
+
+### Cache Memory Access Time
+
+* L1 cache : 4 clock cycles
+* L2 cache: 10 clock cycles
+* L3 cache: 50 clock cycles
+
+### Cache Organization
+
+(S, E, B, m)
+
+M = 2 ^ m, M unique address represent by m bits,
+
+S = 2 ^ s, number of sets
+
+B = 2 ^ b, bytes one block can represent
+
+Each block contains 
+
+* tag, t = m - s - b, 2 b
+* valid bit
+* b bits of information
+
+C(capacity) = S * E * B
+
+### Why Cache use middle-bits to index?
+
+By doing that, cache can contain contigous data in the memory, ultilize the benefit of spatial locality!
+
+### Locality
+
+* Temporal Locatlity: repeatly reference the same variable
+* Spatial Locality: sequentially fetch the nearby elements
+* Loops: have good temporal, spatial and instruction fetches
+
+### Reference Pattern
+
+* Stride-1 reference pattern: To visit each element of a vector sequentially
+* Stride-k reference pattern: To visit every kth elemtn of a contiguous vector
+* Stride increases, spatial locality decreases
 
 ## Program Optimization
 
