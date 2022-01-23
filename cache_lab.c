@@ -77,14 +77,16 @@ void alloc_cache(){
             cache->lines[i][j]->lru_stamp = TIME_STP; // LRU init value
         }
     }
-    printf("cache init\n");
+    //printf("cache init\n");
 }
 
 void access_cache(unsigned int addr, int size){
     cur_time -= 1;
+    //printf("addr here is %d\n", addr);
     unsigned int tag = (addr >> (s_val + b_val));
-    unsigned int set_index =(addr << (32 - s_val - b_val) >> (32 - s_val));
-    printf("\n tag is %x, set is %x", tag, set_index);
+    unsigned int set_index = (addr << (32 - s_val - b_val) >> (32 - s_val));
+    //unsigned int set_index = addr >> b_val & ((1 << s_val) - 1);
+    //printf("\n tag is %x, set is %x", tag, set_index);
     //unsigned int offset = (addr << (32 - b_val) >> (32 - b_val));
     int find_flag = 0;
     int capacity = 0;
@@ -144,7 +146,7 @@ int main(int argc, char *argv[]) {
     v_flag = 0;
     cur_time = TIME_STP;
     while ((opt = getopt(argc, argv, "hvs:E:b:t:")) != -1) {
-        printf("We are in argument section, %c\n", opt);
+        //printf("We are in argument section, %c\n", opt);
         switch (opt){
         case 'h':
             printf("%s", help_string);
@@ -170,13 +172,13 @@ int main(int argc, char *argv[]) {
             exit(EXIT_FAILURE);
         }
     }
-    printf("accept command\n");
+    //("accept command\n");
 
 
     init_cache(s_val, E_val, b_val);
     alloc_cache();
 
-    printf("We are out of argument section\n");
+    //printf("We are out of argument section\n");
     FILE * file;
     file = fopen(t_val, "r");
     if(file == NULL){
@@ -189,15 +191,19 @@ int main(int argc, char *argv[]) {
         char cache_opt;
         unsigned int addr;
         int opt_size;
-        
-        for(int i = 1; input[i] && input[i] != '\n' ; ++i){
+        int read_size_flag;
+        addr = 0;
+        opt_size = 0;
+        cache_opt = 0;
+        read_size_flag = 0;
+
+        for(int i = 1; (input[i] && (input[i] != '\n')) ; ++i){
             char ch = input[i];
+            
             if(v_flag == 1){
                 printf("%c", ch);
             }
-            
-            int read_size_flag;
-            read_size_flag = 0;
+           
             if(ch == 'I'){
                 cache_opt = 0;
             }else if(ch == 'L'){
@@ -206,15 +212,17 @@ int main(int argc, char *argv[]) {
                 cache_opt = 1;
             }else if(ch == 'M'){
                 cache_opt = 2;
-            }else if(ch == ','){
-                continue;
             }else if(ch == ' '){
+                continue;
+            }else if(ch == ','){
                 read_size_flag = 1;
             }else{
                 if(read_size_flag == 1){
                     opt_size = hex2int(ch);
                 }else{
+                    //printf("ch here is %c", ch);
                     addr = addr * 16 + hex2int(ch);
+                    //printf("received addr is %d \n", addr);
                 }
             }
         }
@@ -227,7 +235,7 @@ int main(int argc, char *argv[]) {
         }
         
     }
-    printf("hits:%d misses:%d evictions:%d", hit_cnt, miss_cnt, evict_cnt);
+    printf("hits:%d misses:%d evictions:%d\n", hit_cnt, miss_cnt, evict_cnt);
 
     // if (optind >= argc)
     // {
@@ -237,8 +245,8 @@ int main(int argc, char *argv[]) {
     // printf("name argument = %s\n", argv[optind]);
     // /* Other code omitted */
     // exit(EXIT_SUCCESS);
-    // printSummary(0, 0, 0);
+    printSummary(hit_cnt, miss_cnt, evict_cnt);
 
-    printf("end of program");
+    //printf("end of program");
     return 0;
 }
