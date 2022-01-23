@@ -8,24 +8,39 @@
 #define MAX_SIZE 100
 #define TIME_STP 0x7fffffff // to be time_stamp of LRU
 
-typedef struct
-{
+typedef struct {
     int valid; // 1 is valid
     int tag;
     int * block;
     int lru_stamp; // time stamp of LRU stratgy
 } Line;
 
-typedef struct
-{
+typedef struct {
     int S;
     int E;
     int B;
     Line *** lines;
 } Cache_Type;
 
-int hex2int(char ch)
-{
+
+char * help_string = "Usage: ./csim [-hv] -s <s> -E <E> -b <b> -t <tracefile> \n"
+                         "-h: Optional help flag that prints usage info\n"
+                         "-v: Optional verbose flag that displays trace info\n"
+                         "-s <s>: Number of set index bits (S = 2^s is the number of sets)\n"
+                         "-E <E>: Associativity (number of lines per set)\n"
+                         "-b <b>: Number of block bits (B = 2^b is the block size)\n"
+                         "-t <tracefile>: Name of the valgrind trace to replay\n";
+
+    int v_flag, s_val, E_val, b_val, opt;
+    int hit_cnt;
+    int miss_cnt;
+    int evict_cnt;
+    char * t_val; // name of trace file
+    int cur_time;
+    Cache_Type * cache;
+
+
+int hex2int(char ch){
     if (ch >= '0' && ch <= '9')
         return ch - '0';
     if (ch >= 'A' && ch <= 'F')
@@ -36,9 +51,12 @@ int hex2int(char ch)
 }
 
 void init_cache(int s, int E, int b){
+    
+    cache = (Cache_Type*)malloc(sizeof(Cache_Type));
     cache->S = (1 << s);
     cache->E = E;
     cache->B = (1 << b);
+    
 }
 
 void alloc_cache(){
@@ -59,13 +77,15 @@ void alloc_cache(){
             cache->lines[i][j]->lru_stamp = TIME_STP; // LRU init value
         }
     }
+    printf("cache init\n");
 }
 
 void access_cache(unsigned int addr, int size){
     cur_time -= 1;
     unsigned int tag = (addr >> (s_val + b_val));
     unsigned int set_index =(addr << (32 - s_val - b_val) >> (32 - s_val));
-    unsigned int offset = (addr << (32 - b_val) >> (32 - b_val));
+    printf("\n tag is %x, set is %x", tag, set_index);
+    //unsigned int offset = (addr << (32 - b_val) >> (32 - b_val));
     int find_flag = 0;
     int capacity = 0;
     for(int j = 0; j < cache->E; ++j){
@@ -103,7 +123,7 @@ void access_cache(unsigned int addr, int size){
             int time_cmp = TIME_STP;
             int evict_pos = 0;
             for(int j = 0; j < cache->E; ++j){
-                if(cache->lines[set_index][j]->lru_stamp){
+                if(cache->lines[set_index][j]->lru_stamp >= time_cmp){
                     time_cmp = cache->lines[set_index][j]->lru_stamp;
                     evict_pos = j;
                 }
@@ -112,28 +132,9 @@ void access_cache(unsigned int addr, int size){
             cache->lines[set_index][evict_pos]->lru_stamp = cur_time;
         }
     }
-    if(v_flag == 1){  
-        printf("\n");
-    }
 }
 
-    char * help_string = "Usage: ./csim [-hv] -s <s> -E <E> -b <b> -t <tracefile> \n"
-                         "-h: Optional help flag that prints usage info\n"
-                         "-v: Optional verbose flag that displays trace info\n"
-                         "-s <s>: Number of set index bits (S = 2^s is the number of sets)\n"
-                         "-E <E>: Associativity (number of lines per set)\n"
-                         "-b <b>: Number of block bits (B = 2^b is the block size)\n"
-                         "-t <tracefile>: Name of the valgrind trace to replay\n";
-
-    int v_flag, s_val, E_val, b_val, opt;
-    int hit_cnt;
-    int miss_cnt;
-    int evict_cnt;
-    char * t_val; // name of trace file
-    int cur_time;
-    Cache_Type * cache;
-
-
+    
 
 int main(int argc, char *argv[]) {
 //  The following trivial example program uses getopt() to handle two program options: -n, with no as‐sociated value; and -t val, which expects an associated value.
@@ -142,8 +143,8 @@ int main(int argc, char *argv[]) {
     evict_cnt = 0;
     v_flag = 0;
     cur_time = TIME_STP;
-    while ((opt = getopt(argc, argv, "hvs:E:b:st:")) != -1) {
-        //printf("We are in argument section, %c\n", opt);
+    while ((opt = getopt(argc, argv, "hvs:E:b:t:")) != -1) {
+        printf("We are in argument section, %c\n", opt);
         switch (opt){
         case 'h':
             printf("%s", help_string);
@@ -164,17 +165,18 @@ int main(int argc, char *argv[]) {
             t_val = optarg;
             break;
         default: /* '?' */
-            fprintf(stderr, "Error input\n",
-                    argv[0]);
+            fprintf(stderr, "Error input\n");
             printf("Error is , %c\n", opt);
             exit(EXIT_FAILURE);
         }
     }
+    printf("accept command\n");
+
 
     init_cache(s_val, E_val, b_val);
     alloc_cache();
 
-    printf("We are out of argument section");
+    printf("We are out of argument section\n");
     FILE * file;
     file = fopen(t_val, "r");
     if(file == NULL){
@@ -187,11 +189,13 @@ int main(int argc, char *argv[]) {
         char cache_opt;
         unsigned int addr;
         int opt_size;
-        if(v_flag == 1){
-            printf("%s", input);
-        }
-        for(int i = 0; input[i] && input[i] != '\n' ; ++i){
+        
+        for(int i = 1; input[i] && input[i] != '\n' ; ++i){
             char ch = input[i];
+            if(v_flag == 1){
+                printf("%c", ch);
+            }
+            
             int read_size_flag;
             read_size_flag = 0;
             if(ch == 'I'){
@@ -214,19 +218,27 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
-        access_cache(addr, opt_size);
+       
+        for(int k = 0; k < cache_opt; ++k){
+            access_cache(addr, opt_size);
+        }
+        if(v_flag == 1){  
+            printf("\n");
+        }
+        
     }
     printf("hits:%d misses:%d evictions:%d", hit_cnt, miss_cnt, evict_cnt);
 
-    if (optind >= argc)
-    {
-        fprintf(stderr, "Expected argument after options\n");
-        exit(EXIT_FAILURE);
-    }
-    printf("name argument = %s\n", argv[optind]);
-    /* Other code omitted */
-    exit(EXIT_SUCCESS);
+    // if (optind >= argc)
+    // {
+    //     fprintf(stderr, "Expected argument after options\n");
+    //     exit(EXIT_FAILURE);
+    // }
+    // printf("name argument = %s\n", argv[optind]);
+    // /* Other code omitted */
+    // exit(EXIT_SUCCESS);
+    // printSummary(0, 0, 0);
 
-    printSummary(0, 0, 0);
+    printf("end of program");
     return 0;
 }
