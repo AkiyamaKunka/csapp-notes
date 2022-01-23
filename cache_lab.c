@@ -214,14 +214,9 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
-        int opt_tag = 32 - s_val - b_val;
-        int 
-        
-
-        
-
-
+        access_cache(addr, opt_size);
     }
+    printf("hits:%d misses:%d evictions:%d", hit_cnt, miss_cnt, evict_cnt);
 
     if (optind >= argc)
     {
