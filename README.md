@@ -4,7 +4,17 @@ Author: Kunka Akiyama
 
 Date: Since 28 Nov 2021
 
-Update: 20 Jan 2022
+Update: 24 Jan 2022
+
+## Linking
+
+### Kinds of Object Files
+
+* Relocatable File (.o)
+* Executable Object File (.out file)
+* Shared Object File (.so file), called __Dynamic Link Libraryies__ by Windows
+
+
 
 ## Memory Hierachy
 
@@ -347,6 +357,14 @@ Exact conversion, since int has 32-bits <= 53 of double's precision bits
 #### int -> float
 
 **Will round!** 32 bits > 23 of float single precision
+
+
+
+## Integer
+
+### Bit Operation
+
+When shifting an unsigned value, the `>>` operator in C is a logical shift. When shifting a signed value, the `>>` operator is an arithmetic shift
 
 ## Computer Network
 
