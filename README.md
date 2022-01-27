@@ -4,7 +4,7 @@ Author: Kunka Akiyama
 
 Create : 28 Nov 2021
 
-Update: 24 Jan 2022
+Update: 26 Jan 2022
 
 ## Computer Network
 
@@ -166,9 +166,16 @@ int accept(int listenfd, struct sockaddr *addr, int *addrlen);
 
 ### Kinds of Object Files
 
-* Relocatable File (.o)
-* Executable Object File (.out file)
-* Shared Object File (.so file), called __Dynamic Link Libraryies__ by Windows
+* Relocatable File (.o), Generate by Compilers + Assembler
+
+* Executable Object File (a.out file), by Linkers, can be copied into memory and execute
+* Shared Object File (.so file), can be loaded into memory and linked dynamically
+
+### Kinds of Symbol Types
+
+* Global Symbol: defined by module m, correspond to nonstatic function and variable defined by module m
+* External Symbol: defined by other module, correspond to nonstatic function and variable outside
+* Local Symbol: static C function and static variable, cannot be referecened by other module
 
 ## Memory Hierachy
 
@@ -361,7 +368,7 @@ We get exactly what you would expect to get: `y = 0x00000042`, even we do a "poi
 linux> gcc -0g -o p p1.c p2.c
 ```````
 
-1. C *Preprocesssor* expand Macro, add code from file that concluded by source file with `#include`
+1. C *Preprocesssor* expand Macro, add code from file that concluded by source file with `#include`, generate `p1.i` `p2.i`
 2. *Compiler* generate assembly file `p1.s`, `p2.s`
 3. *Assembler* convert them to object file `p1.o` ` p2.o`, which is binary
 4. *Linker* merge the two file, along with code of function (e.g. printf) to the executable file "p" as sepcifed with `-o p`
