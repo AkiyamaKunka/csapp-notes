@@ -4,7 +4,7 @@ Author: Kunka Akiyama
 
 Create : 28 Nov 2021
 
-Update: 26 Jan 2022
+Update: 27 Jan 2022
 
 ## Computer Network
 
@@ -176,6 +176,17 @@ int accept(int listenfd, struct sockaddr *addr, int *addrlen);
 * Global Symbol: defined by module m, correspond to nonstatic function and variable defined by module m
 * External Symbol: defined by other module, correspond to nonstatic function and variable outside
 * Local Symbol: static C function and static variable, cannot be referecened by other module
+
+### Resolve Duplicate Symbol Names
+
+* Strong symbol: functions and initialized global
+* Weak symbol: Uninitialized global variables
+
+### Rules of Compiler
+
+* No multiple Strong
+* Pick 1 Strong among weak
+* Randomly pick 1 weak from all weak
 
 ## Memory Hierachy
 
