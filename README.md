@@ -4,7 +4,7 @@ Author: Kunka Akiyama
 
 Create : 28 Nov 2021
 
-Update: 9 Jun 2022
+Update: 30 Oct 2022
 
 ## C Language (recorded the my most confusing part)
 
@@ -71,6 +71,12 @@ void func2(unsigned long* val) {
 }
 func2(&x);
 ```
+
+* Rule of Thumb:
+
+Use pointers if you want to do pointer arithmetic with them (e.g. incrementing the pointer address to step through an array) or if you ever have to pass a NULL-pointer.
+
+Use references otherwise.
 
 
 ## Computer Network
