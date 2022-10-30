@@ -30,7 +30,7 @@ void swapx(int x, int y)
 }
 ```
 
-* call by reference, which also means "pass pointer/address to the function", this will swap the value a and b in `main()` However, this is not a real "reference", C implement this by copy the value of pointer in function entrance, and deference them when need.
+* call by reference, which also means "pass value of address to the function", this will swap the value a and b in `main()` However, this is not a real "reference", C implement this by copy the value of pointer in function entrance, and deference them when need.
 
 ```c
 int main()
@@ -49,7 +49,7 @@ void swapx(int* x, int* y)
 }
 ```
 
-* `function(int * p)`, here "p" is a "pointer" type, which is "int *" in syntax.
+* `function(int * p)`, here "p" is a "pointer" type, which is "int *" in syntax. p stores an value of address. (Note this is not dereferencing operation!, it's a type)
 
 ### C++ content, comparing to C
 
