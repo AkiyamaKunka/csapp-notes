@@ -6,6 +6,73 @@ Create : 28 Nov 2021
 
 Update: 9 Jun 2022
 
+## C Language (recorded the my most confusing part)
+
+### Some Conception
+
+* "&" operator, referencing, get address
+* "*" operator, deferencing. retrive value by address
+* call by value, see code below, it change nothing!
+
+```c
+int main()
+{
+    int a = 10, b = 20;
+    swapx(a, b);
+    return 0;
+}
+void swapx(int x, int y)
+{
+    int t;
+    t = x;
+    x = y;
+    y = t;
+}
+```
+
+* call by reference, which also means "pass pointer/address to the function", this will swap the value a and b in `main()` However, this is not a real "reference", C implement this by copy the value of pointer in function entrance, and deference them when need.
+
+```c
+int main()
+{
+    int a = 10, b = 20;
+    swapx(&a, &b);
+    return 0;
+}
+
+void swapx(int* x, int* y)
+{
+    int t;
+    t = *x;
+    *x = *y;
+    *y = t;
+}
+```
+
+* `function(int * p)`, here "p" is a "pointer" type, which is "int *" in syntax.
+
+### C++ content, comparing to C
+
+* `int &x`, a reference type in C++, if `int & x = y;`, we will think x is exactly the same of y
+
+* A real "call by reference in C++"
+
+```cpp
+//---------C++ Call by Reference-----------------------------//
+unsigned long x = 4;
+void func1(unsigned long& val) {
+     val = 5;            
+}
+func1(x);
+
+//---------C Call by referecen(copy pointer value in fact)----//
+void func2(unsigned long* val) {
+     *val = 5;
+}
+func2(&x);
+```
+
+
 ## Computer Network
 
 ### Basic of Network
