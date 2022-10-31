@@ -10,11 +10,11 @@ Update: 30 Oct 2022
 
 ### Some Conception
 
-* "&" operator, referencing, get address
-* "*" operator, deferencing. retrive value by address
+* `&` operator, referencing, get address
+* `*` operator, deferencing. retrive value by address
 * call by value, see code below, it change nothing!
-* `structA a`, `a.b" reference to member of struct object
-* `structA * a` `a->b", reference to a member of pointer, the pointer points to a struct object, equals to `(*a).b`
+* `structA a`, `a.b` reference to member of struct object
+* `structA * a` `a->b`, reference to a member of pointer, the pointer points to a struct object, equals to `(*a).b`
 
 
 ```c
@@ -33,7 +33,7 @@ void swapx(int x, int y)
 }
 ```
 
-* call by reference, which also means "pass value of address to the function", this will swap the value a and b in `main()` However, this is not a real "reference", C implement this by copy the value of pointer in function entrance, and deference them when need.
+* Call by reference(fake), which also means "pass value of address to the function", this will swap the value a and b in `main()` However, this is not a real "reference", C implement this by copy the value of pointer in function entrance, and deference them when need.
 
 ```c
 int main()
