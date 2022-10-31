@@ -13,6 +13,9 @@ Update: 30 Oct 2022
 * "&" operator, referencing, get address
 * "*" operator, deferencing. retrive value by address
 * call by value, see code below, it change nothing!
+* `structA a`, `a.b" reference to member of struct object
+* `structA * a` `a->b", reference to a member of pointer, the pointer points to a struct object, equals to `(*a).b`
+
 
 ```c
 int main()
