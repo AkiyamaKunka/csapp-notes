@@ -14,7 +14,7 @@ Update: 30 Oct 2022
 * `*` operator, deferencing. retrive value by address
 * call by value, see code below, it change nothing!
 * `structA a`, `a.b` reference to member of struct object
-* `structA * a` `a->b`, reference to a member of pointer, the pointer points to a struct object, equals to `(*a).b`
+* `structA * a` `a->b`, reference to a member of struct, via a pointer pointing to a struct object, equals to `(*a).b`
 
 
 ```c
